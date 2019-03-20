@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../练习/X-admin/POMS-admin/POMS-admin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../练习/X-admin/POMS-admin/POMS-admin/datatable/bootstrap-table.css">
+    <link rel="stylesheet" href="../练习/X-admin/POMS-admin/POMS-admin/css/font.css">
+    <link rel="stylesheet" href="../练习/X-admin/POMS-admin/POMS-admin/css/xadmin.css">
+    <link rel="stylesheet" href="../练习/X-admin/POMS-admin/POMS-admin/zTree_v3/css/metroStyle/metroStyle.css">
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/js/jquery-1.9.1.min.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/zTree_v3/js/jquery.ztree.all.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/zTree_v3/js/jquery.ztree.core.min.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/zTree_v3/js/jquery.ztree.exhide.min.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/zTree_v3/js/jquery.ztree.excheck.min.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/zTree_v3/js/jquery.ztree.exedit.min.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/zTree_v3/js/jquery.ztree.core.min.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/js/bootstrap.min.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/datatable/bootstrap-table.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/datatable/bootstrap-table-zh-CN.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/lib/layui/layui.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/js/xadmin.js"></script>
+    <script src="../练习/X-admin/POMS-admin/POMS-admin/js/content.js"></script>
+    <style>
+        #dropDownMenu {
+            display: inline-block;
+            margin: 0 auto;
+            width: 550px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #department {
+            float: left;
+            border-right: 2px solid #ccc;
+        }
+
+        #hideUser {
+            display: none;
+            float: left;
+            width: 200px;
+            height: 700px;
+            padding: 10px;
+        }
+
+        #hideUser li:hover {
+            cursor: pointer;
+            text-decoration: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="dropDownMenu">
+        <div id="department" style="height:700px;width:300px;overflow:auto">
+            <ul id="ztree1" class="ztree"></ul>
+        </div>
+        <ul id="hideUser">
+        </ul>
+    </div>
+    <script>
+        infodepartment1()
+
+        function infodepartment1() {
+            var url = "userbook/getUserBook";
+            var datas = {};
+            PostAjax(url, datas, function (data) {
+                JSON.stringify(data);
+                var datas = data.code;
+                var dataed = data.data;
+                console.log(dataed)
+                if (datas == 0) {
+                    var zNodes = dataed;
+                    var t1 = $("#ztree1");
+                    t1 = $.fn.zTree.init(t1, setting1, zNodes);
+                    zTree = $.fn.zTree.getZTreeObj("ztree1");
+                    rMenu = $("#rMenu");
+                    var nodeList = zTree.getNodes();
+                    for (var i = 0; i < nodeList.length; i++) {
+                        zTree.expandNode(nodeList[i], true, true, true);
+                    }
+                }
+            })
+        }
+        var setting1 = {
+            view: {
+                dblClickExpand: false
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                    idKey: "departmentId",
+                    pIdKey: "parentDepartmentId",
+                    rootPId: 0,
+                },
+                key: {
+                    name: "departmentName",
+                }
+            },
+            callback: {
+                onClick: onMouseDown1,
+            }
+        }
+
+        function onMouseDown1(event, treeId, treeNode) {
+            $("#hideUser").html()
+            if (treeNode.users.length != 0) {
+                $("#hideUser").css("display", "block")
+                var btn = "";
+                for (var i = 0; i < treeNode.users.length; i++) {
+                    btn += '<li><a href="javascript:;">' + treeNode.users[i].name + '</a></li>'
+                    $("#hideUser").html(btn)
+                }
+            } else {
+                $("#hideUser").css("display", "none")
+            }
+        }
+    </script>
+</body>
+
+</html>

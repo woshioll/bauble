@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="num">
+    <input type="button" value="计算" name="" id="run">
+
+    <script>
+        var aNum = document.getElementById("num");
+        var aRun = document.getElementById("run");
+        // var m = aNum.value;//递归注释
+
+        aRun.onclick = function () {
+            // self()
+
+            var m = aNum.value;
+            // console.log(Fibonacci(m))
+            // console.log(Fibonacci2(m))
+            // console.log(Fibonacci3(m))
+            console.log(Fibonacci4(m))
+        };
+
+        function self() {
+            var a = 1,
+                b = 1,
+                n = 1;
+            for (var i = 0; i < m - 2; i++) {
+                n = a + b;
+                b = a;
+                a = n;
+            };
+            console.log(n);
+        }
+
+        // 非尾递归
+        function Fibonacci(m) {
+            if (m <= 1) {
+                return 1
+            };
+
+            return Fibonacci(m - 1) + Fibonacci(m - 2);
+        }
+        // 尾递归优化
+        function Fibonacci2(m, ac1 = 1, ac2 = 1) {
+            if (m <= 1) {
+                return ac2
+            };
+
+            return Fibonacci2(m - 1, ac2, ac1 + ac2);
+        }
+
+        // 循环版
+        function Fibonacci3(m) {
+            if (m === 1 || m === 2) {
+                return 1;
+            }
+            let ac1 = 1,
+                ac2 = 1;
+            for (let i = 2; i < m; i++) {
+                [ac1, ac2] = [ac2, ac1 + ac2]; //解构赋值
+            }
+            return ac2;
+        }
+
+        // generator
+        function* fibonacci4() {//迭代器
+            let [prev, curr] = [1, 1];
+            while (true) {
+                [prev, curr] = [curr, prev + curr];
+                yield curr;
+            }
+        }
+
+        function Fibonacci4(m) {
+            if (m === 1 || m === 2) {
+                return 1;
+            }
+            let ac = 0;
+            const fibo = fibonacci4();
+            for (let i = 2; i < m; i++) {
+                ac = fibo.next()
+            }
+            return ac.value;
+        }
+    </script>
+</body>
+
+</html>
