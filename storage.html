@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./src/js/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <script>
+        var storage = window.sessionStorage;
+        storage["a"] = 1;
+        storage.b = 2;
+        storage.setItem("c",3)
+
+        console.log(storage.getItem("a"))
+        console.log(storage["b"])
+        console.log(storage.c)
+        console.log(storage)
+
+        window.localStorage.setItem("d","4")
+        console.log(localStorage.d)
+    </script>
+</body>
+</html>

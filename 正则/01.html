@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var a = /[0-9]*$/
+        // var a = /\d{9}$/
+        // var a = /\d{9,14}$/
+        // var a = /(0|[1-9][0-9]*)$/
+
+        // var a = /^0|\-?[1-9][0-9]*$/
+        var a = /^([0-9]+|[0-9]{1,3}(,[0-9]{3}))*(.[0-9]{1,2})?$/
+        var A = '10,1,23,123.21'
+
+        console.log(a.test(A))
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" name="" id="oll" value="oll">
+    <input type="text" name="" id="text">
+    <script>
+        var o = document.getElementById('text')
+        var t = document.getElementById('oll')
+        var i = 0;
+
+        t.onclick = function () {
+            setInterval(()=> {
+                i++
+                o.innerHTML = i
+                console.log(i)
+            }, 100);
+        }
+    </script>
+</body>
+
+</html>

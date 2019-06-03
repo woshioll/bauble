@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form name="form1">
+        <input type="file" name="picpath" id="picpath" style="display:none;"
+            onChange="document.form1.path.value=this.value" >
+        <input name="path" readonly>
+        <input type="button" value="上传照片" onclick="document.form1.picpath.click()">
+     </form>
+<div id="div">上传</div>
+</body>
+<script>
+    var div = document.getElementById('div')
+    var pic = document.getElementById('picpath')
+    div.onclick=function(){
+        console.log(pic.value)
+    }
+</script>
+</html>

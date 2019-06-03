@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>两个数相同了<span id="two"></span>次,为<span id="twonum"></span>，平均数是<span id="oll"></span></p>
+    <p>三个数相同了<span id="three"></span>次,为<span id="threenum"></span>，平均数是<span id="olll"></span></p>
+    <script>
+        var twoval = 0
+        var threeval = 0
+        var twovalnum = []
+        var threevalnum = []
+        var twovalnum2 = 0
+        var threevalnum3 = 0
+
+        var number = 0
+
+        var oTwo = document.getElementById('two')
+        var oThree = document.getElementById('three')
+        var oTwonum = document.getElementById('twonum')
+        var oThreenum = document.getElementById('threenum')
+        var oOll = document.getElementById('oll')
+        var oOlll = document.getElementById('olll')
+
+        time()
+
+        function time() {
+            for (var j = 0; j <= number; j++) {
+                var x = Math.round(Math.random() * 10)
+                var y = Math.round(Math.random() * 10)
+                var z = Math.round(Math.random() * 10)
+
+                // console.log(x, y, z)
+                if (x == y || y == z || x == z && !x==y==z) {
+                    console.log('两个'+j)
+                    twoval += 1
+                    twovalnum += ','
+                    twovalnum += x
+                    twovalnum2 += x
+                }
+                if (x == y == z) {
+                    console.log('三个'+j)
+                    threeval += 1
+                    threevalnum += ','
+                    threevalnum += x
+                    threevalnum3 += x
+                }
+                oTwo.innerHTML = twoval
+                oThree.innerHTML = threeval
+                oTwonum.innerHTML = twovalnum
+                oThreenum.innerHTML = threevalnum
+                oOll.innerHTML = Math.round(twovalnum2 / twoval)
+                oOlll.innerHTML = Math.round(threevalnum3 / threeval)
+            }
+        }
+        console.log('两个的概率：' + Math.round((twoval / number)*100)+'%')
+        console.log('三个的概率：' + Math.round((threeval / number)*100)+'%')
+    </script>
+</body>
+
+</html>

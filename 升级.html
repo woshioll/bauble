@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>软件升级</title>
+	<link rel="stylesheet" href="../../src/css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="../../src/css/custom.css">
+	<link rel="stylesheet" href="../../src/css/demo.css">
+	<link rel="stylesheet" href="../../src/css/normalize.css">
+	<link rel="stylesheet" href="../../src/css/bootstrap.min.css">
+
+	<script src="../../src/js/jquery-1.11.0.min.js"></script>
+	<script src="../../src/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="../../src/js/bootstrap.min.js"></script>
+	<script src="../../src/js/custom.js"></script>
+	<script src="../../src/js/content.js"></script>
+	<script src="../../src/js/md5.js"></script>
+</head>
+
+<body>
+	<style type="text/css">
+		#container {
+			padding: 20px;
+		}
+
+		.col-sm-offset-2 {
+			text-align: center;
+		}
+
+		input {
+			text-align: center;
+		}
+
+		.btn {
+			padding: 6px 20px;
+		}
+
+		.send {
+			position: absolute;
+			top: -4px;
+			left: 214px;
+		}
+
+		.col-sm-3 {
+			margin-top: 7px;
+		}
+	</style>
+	</head>
+
+	<body>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<span class="tt"></span>
+				软件升级
+			</div>
+
+			<iframe name="message" style="display: none"></iframe>
+
+
+			<form id="upForm" method="POST" action="/cgi-bin/ccgi?tmp" enctype="multipart/form-data"
+				class="form-horizontal panel-body" target="message">
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">文件:</label>
+					<div class="col-sm-3">
+						<input id="file" type="file" name="upload1" style="width: 184px" /></input>
+						<input class="btn btn-info send" style="padding: 6px 20px" type="button" name="submitbutton"
+							value="提交" onclick="submitXML()" /></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">当前软件版本:</label>
+					<div class="col-sm-3">
+						<span>1.1.0</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="inputEmail3" class="col-sm-2 control-label">当前硬件版本:</label>
+					<div class="col-sm-3">
+						<span>JZ-001</span>
+					</div>
+				</div>
+
+				<div class="alert alert-warning" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+							aria-hidden="true">&times;</span></button>
+					<strong>注意：</strong> 升级时请先选择与当前硬件版本一致的软件，升级过程不能关闭路由器电源，否则将导致路由器损坏而无法使用，升级过程约30秒，当结束升级后，路由器将会自动重启。
+				</div>
+
+				<div class="form-group container">
+					<div id="up" class="col-sm-offset-2 col-sm-8">
+						<input type="button" name="submitbutton" class="btn btn-info" disabled value="升级"></input>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="userStat"></div>
+	</body>
+	<script type="text/javascript">
+		var md5val = '';
+
+		function ophiddenFile() {
+			var dd = $('#hiddenFile').val().split('\\');
+			$('#showFileName').val(dd[dd.length - 1]);
+		}
+		function submitXML() {
+			var fileInput = $('#file').get(0).files[0];
+			if (fileInput) {
+				var fileReader = new FileReader(),
+					box = document.getElementById('box');
+				blobSlice = File.prototype.mozSlice || File.prototype.webkitSlice || File.prototype.slice,
+					file = document.getElementById("file").files[0],
+					chunkSize = 2097152,
+					// read in chunks of 2MB
+					chunks = Math.ceil(file.size / chunkSize),
+					currentChunk = 0,
+					spark = new SparkMD5();
+
+				fileReader.onload = function (e) {
+					console.log("read chunk nr", currentChunk + 1, "of", chunks);
+					spark.appendBinary(e.target.result); // append binary string
+					currentChunk++;
+
+					if (currentChunk < chunks) {
+						loadNext();
+					} else {
+						console.log("finished loading");
+						console.info("computed hash", spark.end()); // compute hash
+					}
+				};
+				function loadNext() {
+					var start = currentChunk * chunkSize,
+						end = start + chunkSize >= file.size ? file.size : start + chunkSize;
+
+					fileReader.readAsBinaryString(blobSlice.call(file, start, end));
+				};
+				loadNext();
+				var uptime = Math.floor(fileInput.size / 500)
+				$("#upForm").submit();
+				startup(uptime, true);
+				$('#file').val('')
+				$('#up').html(
+					'<input id="upGrade" type="button" name="submitbutton" class="btn btn-info" value="升级"></input>')
+				$('#upGrade').click(function () {
+					var url = 'route/system/upgrade';
+					var datas = {
+						'upgrade': 'true'
+					};
+					PostJSON(url, datas, function (data) {
+						console.log(data)
+					})
+					// logout()
+				})
+			} else {
+				alert("请选择上传文件！");
+				$('#up').html('<input type="button" name="submitbutton" class="btn btn-info" disabled value="升级"></input>')
+			}
+		}
+
+	</script>
+
+</html>

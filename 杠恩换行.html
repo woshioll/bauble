@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="main"></div>
+<script type="text/javascript">
+	var Main = document.getElementById('main')
+	var str = '123123\n23123213\n123123\n3213'
+	var strr =str.replace(/\n/g,"<br/>")
+	console.log(strr)
+	Main.innerHTML = strr;
+</script>
+</body>
+</html>

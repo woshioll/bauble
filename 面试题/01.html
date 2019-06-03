@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <script>
+        var array = [3, [2, -4, [5, 7]], -3, ['aa', [
+            ['bb']
+        ]]]
+        var result = flatten(array)
+
+        console.log(result)
+
+        // function flatten(arr, result = []) {
+        //     for (let item of arr) {
+        //         if (Array.isArray(item))
+        //             flatten(item, result)
+        //         else
+        //             result.push(item)
+        //     }
+        //     return result
+        // }
+        function flatten(arr) {
+            return arr.reduce((flat, toFlatten) => {
+                return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+            }, []);
+        }
+    </script>
+</body>
+
+</html>
