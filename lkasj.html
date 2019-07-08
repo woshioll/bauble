@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>0000001</li>
+        <li>0000002</li>
+        <li>0000003</li>
+        <li>0000004</li>
+        <li>0000005</li>
+        <li>0000006</li>
+        <li>0000007</li>
+        <li>0000008</li>
+    </ul>
+    <script>
+        //若是你不想别人扒掉你的模板，可以把这段js代码加到你网页上，即可屏蔽鼠标右键菜单、复制粘贴、选中等
+
+        //屏蔽右键菜单 
+       document.oncontextmenu = function (event) {
+           if (window.event) {
+               event = window.event;
+           }
+           try {
+               var the = event.srcElement;
+               if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+                   return false;
+               }
+               return true;
+           } catch (e) {
+               return false;
+           }
+       }
+       //屏蔽粘贴 
+       document.onpaste = function (event) {
+           if (window.event) {
+               event = window.event;
+           }
+           try {
+               var the = event.srcElement;
+               if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+                   return false;
+               }
+               return true;
+           } catch (e) {
+               return false;
+           }
+       }
+       //屏蔽复制 
+       document.oncopy = function (event) {
+           if (window.event) {
+               event = window.event;
+           }
+           try {
+               var the = event.srcElement;
+               if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+                   return false;
+               }
+               return true;
+           } catch (e) {
+               return false;
+           }
+       }
+       //屏蔽剪切 
+       document.oncut = function (event) {
+           if (window.event) {
+               event = window.event;
+           }
+           try {
+               var the = event.srcElement;
+               if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+                   return false;
+               }
+               return true;
+           } catch (e) {
+               return false;
+           }
+       }
+       //屏蔽选中 
+       document.onselectstart = function (event) {
+           if (window.event) {
+               event = window.event;
+           }
+           try {
+               var the = event.srcElement;
+               if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")) {
+                   return false;
+               }
+               return true;
+           } catch (e) {
+               return false;
+           }
+       }
+    </script>
+</body>
+
+</html>

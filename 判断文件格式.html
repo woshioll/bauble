@@ -26,6 +26,8 @@
             filePath = $('#fileId').val().toLowerCase().split(".");
             fileType = filePath[filePath.length - 1]; //获得文件结尾的类型如 zip rar 这种写法确保是最后的
             $('.errHint').show().text(fileName[2]);
+            console.log(fileName);
+            console.log(fileName2);
             console.log(filePath);
             console.log(fileType);
             if (!(fileType == "png" || fileType == "jpg" || fileType == "xlsx" || fileType == "docx" || fileType ==

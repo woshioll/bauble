@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        for (let i = -1; ++i < 10;) {
+            console.log(i)
+        } // 0,1,2,3,4,5,6,7,8,9对比下常规写法：
+
+        for (let i = 0; i < 10; i++) {
+            console.log(i)
+        } // 0,1,2,3,4,5,6,7,8,9递减遍历
+
+        // 倒序遍历， 不遍历第一个， 常见用来删除元素等：
+
+        for (let i = 10; i--;) {
+            console.log(i)
+        } // 9,8,7,6,5,4,3,2,1,0对比下常规写法：
+
+        for (let i = 10 - 1; i > -1; i--) {
+            console.log(i)
+        } // 9,8,7,6,5,4,3,2,1,0原理解析：
+
+        // for (l1; l2; l3) {}
+        // 执行顺序：
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- -----------------------------是否是整数------------------------------ -->
+    <!-- <script>
+        console.log(isInt(30))
+        function isInt(x) {
+            return (x ^ 0) === x
+        }
+        // return Math.round(x) === x
+        // return (typeof x === 'number') && (x % 1 === 0)
+        // ES6 -> Number.isInteger()
+    </script> -->
+
+    <!-- ------------------------------去重-------------------------------- -->
+    <!-- <script>
+        // ES6
+        Array.from(new Set(arr))
+        // ES5
+        arr.filter(function (ele, index, array) {
+            return index === array.indexOf(ele)
+        })
+    </script> -->
+
+    <!-- -----------------------------随机颜色--------------------------------- -->
+    <!-- <script>
+        function getRandomColor() {
+            return `#${Math.random().toString(16).substr(2, 6)}`
+        }
+        console.log(getRandomColor())
+    </script> -->
+
+    <!-- ---------------------------随机长度字符串----------------------------- -->
+    <script>
+        function randomStr(n) {
+            let standard = 'abcdefghijklmnopqrstuvwxyz9876543210'
+            let len = standard.length
+            let result = ''
+            for (let i = 0; i < n; i++) {
+                result += standard.charAt(Math.floor(Math.random() * len))
+            }
+            return result
+        }
+        console.log(randomStr(9))
+    </script>
+</body>
+
+</html>
