@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../src/js/jquery-1.11.0.min.js"></script>
+</head>
+
+<body>
+    <script>
+        // $.ajax({
+        //     type: "GET",
+        //     async: true,
+        //     url: "http://10.0.0.1/cgi-bin/cgi.cgi?/app/route/Status/Status",
+        //     dataType: "json", //数据类型为jsonp  
+        //     // jsonp: "baidu", //服务端用于接收callback调用的function名的参数
+        //     success: function (data) {
+        //         alert(data);
+        //     },
+        //     error: function () {
+        //         alert('fail');
+        //     }
+        // });
+
+
+        // var settings = {
+        //     "async": true,
+        //     "crossDomain": true,
+        //     "dataType": "JSONP",
+        //     "url": "http://10.0.0.1/cgi-bin/cgi.cgi?/app/route/Status/Status",
+        //     "method": "GET",
+        //     "headers": {
+        //         "Access-Control-Allow-Credentials": true,
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Access-Control-Allow-Methods": "GET",
+        //         "Access-Control-Allow-Headers": "Content-Type",
+        //         "authorization": "Basic ZGNlMzFjMzNkMDJlY2RiZjsdfdsfIxNjc6YzNhYzssdfsdfdfsdfMTU1ZDk4ZGM=",
+        //     }
+        // }
+        // $.ajax(settings).done(function (response) {
+        //     console.log(response);
+        // });
+
+        // var img = new Image()
+        // img.onload = img.onerror = function(){
+        //     alert('done')
+        // }
+        // img.src = 'http://10.0.0.1/cgi-bin/cgi.cgi?/app/route/Status/Status'
+
+        function route(data){
+            console.log(data)
+        }
+
+        var oScript = document.createElement('script')
+        oScript.src = 'https://www.baidu.com/sugrec?prod=pc&wd=q&cb=route'
+        document.body.appendChild(oScript)
+        
+    </script>
+</body>
+
+</html>

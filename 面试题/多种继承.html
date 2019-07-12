@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 原型链继承
+        /* function SuperType(){
+            this.name = 'Tvette';
+            this.colors = ['pink','blue','green'];
+        }
+        SuperType.prototype.getName = function(){
+            return this.name;
+        }
+        function subType(){
+            this.age = 22;
+        }
+        subType.prototype = new SuperType();
+        subType.prototype.getAge = function(){
+            return this.age
+        }
+        subType.prototype.constructor = subType;
+        let instance1 = new subType()
+        instance1.colors.push('yellow');
+        console.log(instance1.getName())
+        console.log(instance1.colors)
+
+        let instance2 = new subType()
+        console.log(instance2.colors) */
+
+
+        // 借用构造函数继承
+        /* function SuperType(name){
+            this.name = name;
+            this.colors = ['pink','blue','green'];
+        }
+        function subType(name){
+            SuperType.call(this,name)
+        }
+        let instance1 = new subType('Yvette')
+        instance1.colors.push('yellow')
+        console.log(instance1.colors)
+        let instance2 = new subType('Jack')
+        console.log(instance2.colors) */
+
+
+        // 组合继承(原型链+借用构造函数)
+        /* function SuperType(name){
+            this.name = name;
+            this.colors = ['pink','blue','green'];
+        }
+        SuperType.prototype.sayName = function(){
+            console.log(this.name)
+        }
+        function subType(name,age){
+            SuperType.call(this,name)
+            this.age = age
+        }
+        subType.prototype = new SuperType()
+        subType.prototype.constructor = subType
+        subType.prototype.sayAge = function(){
+            console.log(this.age)
+        }
+        let instance1 = new subType('Yvette',20)
+        instance1.colors.push('yellow')
+        console.log(instance1.colors)
+        instance1.sayName()
+        let instance2 = new subType('jack',22)
+        console.log(instance2.colors) */
+
+
+        // 原型式继承
+        var person = {
+            name:'Yvette',
+            hobbies:['reading','photography']
+        }
+        var person1 = Object.create(person);
+        person1.name = 'Jack';
+        person1.hobbies.push('coding')
+        var person2 = Object.create(person);
+        person2.name = 'Echo';
+        person2.hobbies.push('running')
+        console.log(person1)
+        console.log(person1.hobbies)
+        console.log(person2)
+        console.log(person2.hobbies)
+    </script>
+</body>
+
+</html>

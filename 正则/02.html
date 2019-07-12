@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var regMap = {
+            pass: /^\w+|[,.!:'";\/~`@#$%^&*)(\[\]}{><?\|]|[\\\'\"]$/,
+            rule: /\s|[,.!:'";\/~`@#$%^&*)(\[\]}{><?]|[\\\'\"]/,
+            num: /^(\d*)$/,
+            num_1: /^(\d*|-1)$/,
+            str_null: /[\\\'\"]|\s/,
+            str: /[\\\'\"]/,
+            az09: /^(|[A-Za-z\d]+)$/,
+            che: /[\u4E00-\u9FA5\uF900-\uFA2D]/,
+            domain: /[\u4E00-\u9FA5\uF900-\uFA2D]|[\\\'\"]/,
+            url: /^([A-Za-z\d\.\-]+)$/,
+            num_d: /^([\d\.\-]+)$/,
+            hex: /^[A-Fa-f\d]+$/,
+            ip: /^((22[0-3])|(2[0-1]\d)|(1\d\d)|([1-9]\d)|[1-9])(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3}$/,
+            ipv6after: /^[a-fA-F0-9]{1,4}:[a-fA-F0-9]{1,4}:[a-fA-F0-9]{1,4}:[a-fA-F0-9]{1,4}$/,
+            dns: /^(|((22[0-3])|(2[0-1]\d)|(1\d\d)|([1-9]\d)|[1-9])(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3})$/,
+            mac: /^([A-Fa-f\d][02468aceACE]-[A-Fa-f\d]{2}-[A-Fa-f\d]{2}-[A-Fa-f\d]{2}-[A-Fa-f\d]{2}-[A-Fa-f\d]{2})|([A-Fa-f\d][02468aceACE]:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2}:[A-Fa-f\d]{2})$/,
+            port: /^(\d{1,4}|([1-5]\d{4})|6[0-4]\d{3}|65[0-4]\d\d|655[0-2]\d|6553[0-5])$/,
+            port_null: /^(|\d{1,4}|([1-5]\d{4})|6[0-4]\d{3}|65[0-4]\d\d|655[0-2]\d|6553[0-5])$/,
+            keytime: /^([6-9]\d|\d{3,4}|[1-7]\d\d\d\d|8[0-5]\d\d\d|86[0-3]\d\d|86400)$/,
+            dhcptime: /^([6-9]\d|\d{3,6}|[1-2][0-5][0-8]\d\d\d\d|2591\d\d\d|2592000)$/,
+            limit255: /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]\d|[1-9])$/,
+            limit12799: /^(\d{1,4}|1[0-1]\d\d\d|12[0-7]\d\d)$/,
+            year: /^(200[8-9]|2\d[1-2]\d|2\d3[0-5])$/,
+            mon: /^(0[1-9]|[1-9]|1[0-2])$/,
+            hour: /^(0[0-9]|[0-9]|1[0-9]|2[0-3])$/,
+            minsec: /^(0[0-9]|[0-9]|[1-5][0-9])$/,
+            pak: /^([5-9]|[1-9]\d|[1-9]\d\d|[1-2]\d\d\d|3000)$/,
+            pin: /^\d{8}$/,
+            page: /^([1-9]|[1-9]\d|100)$/,
+            Emain:/^(\d+|\w+)\@(\w+|\d+)\.\w+$/
+        };
+        var reg = new RegExp(regMap.Emain)
+        var num = '123sdf12@qsd123q.com'
+        console.log(reg.test(num))
+    </script>
+</body>
+
+</html>

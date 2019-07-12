@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>LAN口配置</title>
+    <link rel="stylesheet" href="../../src/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../../src/css/custom.css">
+    <link rel="stylesheet" href="../../src/css/demo.css">
+    <link rel="stylesheet" href="../../src/css/normalize.css">
+    <link rel="stylesheet" href="../../src/css/bootstrap.min.css">
+    <script src="../../src/js/jquery-1.11.0.min.js"></script>
+    <script src="../../src/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../src/js/bootstrap.min.js"></script>
+    <script src="../../src/js/custom.js"></script>
+    <script src="../../src/js/content.js"></script>
+</head>
+
+<body>
+    <style type="text/css">
+        #container {
+            padding: 20px;
+        }
+
+        .container {
+            margin-left: 0;
+        }
+
+        .col-sm-offset-2 {
+            text-align: center;
+        }
+
+        #sys {
+            margin-bottom: 33px;
+        }
+
+        #sys>a {
+            font-size: 24px;
+            color: #5b5b5b;
+        }
+
+        .dropdown-menu li {
+            width: 290px;
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        .red {
+            position: relative;
+            top: 8px;
+            left: 14px;
+            color: #a94442;
+            display: none;
+        }
+
+        #myModal {
+            display: inline-block;
+            background: #333;
+            opacity: 0.5;
+        }
+
+        .USText {
+            display: inline-block
+        }
+
+        .userStat {
+            display: none;
+        }
+    </style>
+    </head>
+
+    <body>
+        <div id="container" class="container">
+            <div id="sys"><span class="tt"></span>&nbsp;<a href="javascript:;">LAN口配置</a></div>
+            <form class="form-horizontal">
+                <div class="form-group"><label for="inputEmail3" class="col-sm-2 control-label">IP地址:</label>
+                    <div class="col-sm-3"><input type="text" id="LANIpAdd" class="form-control lantest">
+                        <span class="valkey_oll" style="display: none">0</span>
+                    </div>
+                    <span class="red red0">IP输入错误</span>
+                </div>
+                <div class="form-group"><label for="inputPassword3" class="col-sm-2 control-label">子网掩码:</label>
+                    <div class="col-sm-3"><input type="text" id="LANZwAdd" class="form-control lantest">
+                        <span class="valkey_oll" style="display: none">0</span></div>
+                    <span class="red red1">子网掩码输入非法</span>
+                </div>
+                <div class="form-group container">
+                    <div class="col-sm-offset-2 col-sm-8"><button id="save" type="button" class="btn btn-info"
+                            style="margin-right: 20px;">保存</button><button type="button" id="qx" class="btn btn-info"
+                            onclick="reloadNow()">取消</button></div>
+                </div>
+            </form>
+        </div>
+        <div class="userStat">
+            <div class="container alert alert-info alert-dismissible USText" role="alert">
+                <strong>正在连接<span id="ipaddress"></span>,请稍候<span id="shdd"></span></strong>
+            </div>
+            <div class="modal fade loading mask" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                var regip =
+                    /(^$)|^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+                var regmask =
+                    /(^$)|^(254|252|248|240|224|192|128|0)\.0\.0\.0$|^(255\.(254|252|248|240|224|192|128|0)\.0\.0)$|^(255\.255\.(254|252|248|240|224|192|128|0)\.0)$|^(255\.255\.255\.(254|252|248|240|224|192|128|0))$/;
+                $('#lanUl a').click(function () {
+                    $('#lanValue').hmtl = this.html;
+                });
+                $('#LanDk a').click(function () {
+                    $('#LANZwAdd').val(this.text)
+                });
+                var url = 'route/network/lan';
+                var datas = '';
+                GetAjax(url, datas, function (data) {
+                    $('#LANIpAdd').val(data.ipaddr);
+                    $('#LANZwAdd').val(data.netmask)
+                });
+                $('#save').click(function () {
+                    var one = $('#LANIpAdd').val();
+                    var two = $('#LANZwAdd').val();
+                    var onee = one.split('.')
+                    var twoo = two.split('.')
+                    var xhflag = 0;
+                    for (var i = 0; i < 4; i++) {
+                        if ((onee[i] | twoo[i]) == '255') {
+                            xhflag++
+                        }
+                    }
+                    if (xhflag == 4) {
+                        alert('IP地址和子网掩码配置错误,请检查重试!')
+                    }
+
+                    if (!regip.test($('#LANIpAdd').val())) {
+                        $('.red0').show()
+                        $('#LANIpAdd').parent().addClass('has-error')
+                    } else {
+                        $('.red0').hide()
+                        $('#LANIpAdd').parent().removeClass('has-error')
+                    }
+                    if (!regmask.test($('#LANZwAdd').val())) {
+                        $('.red1').show()
+                        $('#LANZwAdd').parent().addClass('has-error')
+                    } else {
+                        $('.red1').hide()
+                        $('#LANZwAdd').parent().removeClass('has-error')
+                    }
+
+                    var timer1 = ''
+                    timer1 = setInterval(function () {
+                        restore()
+                        clearInterval(timer1)
+                    }, 2000);
+                    $('#LANIpAdd').focus(function () {
+                        $('.red0').hide()
+                        $('#LANIpAdd').parent().removeClass('has-error')
+                    })
+                    $('#LANZwAdd').focus(function () {
+                        $('.red1').hide()
+                        $('#LANZwAdd').parent().removeClass('has-error')
+                    })
+
+                    function restore() {
+                        $('#LANIpAdd').parent().removeClass("has-error");
+                        $('#LANZwAdd').parent().removeClass("has-error");
+                        $('.red0').hide()
+                        $('.red1').hide()
+                    }
+
+                    if (regip.test($('#LANIpAdd').val()) && regmask.test($('#LANZwAdd').val()) &&
+                        xhflag != 4) {
+                        for (var i = 0; i < $('.valkey_oll').length; i++) {
+                            if ($('.valkey_oll').eq(i).html() == '1') {
+                                this.index = i
+                                $('.valkey_oll').eq(this.index).parent().next().show()
+                                $('.valkey_oll').eq(this.index).parent().addClass('has-error')
+                            } else {
+                                this.index = i
+                                $('.valkey_oll').eq(this.index).parent().next().hide()
+                                $('.valkey_oll').eq(this.index).parent().removeClass('has-error')
+                            }
+                        }
+                        if ($('.valkey_oll').eq(0).html() == '0' && $('.valkey_oll').eq(1).html() ==
+                            '0') {
+                            noclk()
+                            var lanip = $('#LANIpAdd').val();
+                            var lanmask = $('#LANZwAdd').val();
+                            if (lanip == '' || lanmask == '') {
+                                alert('提交内容不能为空')
+                            } else {
+                                var datas = {
+                                    "ipaddr": lanip,
+                                    "netmask": lanmask,
+                                };
+                                PostJSON(url, datas, function (data) {})
+
+                                $('#ipaddress').html(lanip)
+                                setInterval(function () {
+                                    var dd = '';
+                                    for (var j = 0; j < i; j++) {
+                                        dd += '. '
+                                    }
+                                    $('#shdd').html(dd);
+                                    i == 6 ? i = 0 : i++
+                                }, 200);
+                                $('.userStat').show()
+
+                                var timer2 = setInterval(function () {
+                                    getnewadd()
+                                }, 2000);
+
+                                function getnewadd() {
+                                    jQuery.support.cors = true;
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "http://" + lanip +
+                                            "/cgi-bin/cgi.cgi?/app/route/Status/Status",
+                                        data: '',
+                                        async: true,
+                                        dataType: "json",
+                                        crossDomain: true,
+                                        xhrFields: {
+                                            withCredentials: true
+                                        },
+                                        success: function (data) {
+                                            console.log(data)
+                                            clearInterval(timer2)
+                                            top.location.href = 'http://' + lanip +
+                                                '/index.html'
+                                        },
+                                    })
+                                }
+                            }
+                        }
+                    }
+
+                });
+            });
+            var timer = '';
+            var lastTime = new Date().getTime();
+            var currentTime = new Date().getTime();
+            var timeOut = 10 * 60 * 1000;
+            $(function () {
+                $(window).mousemove(function () {
+                    lastTime = new Date().getTime();
+                });
+            });
+
+            function testTime() {
+                currentTime = new Date().getTime();
+                if (currentTime - lastTime > timeOut) {
+                    top.location.href = '../../index.html';
+                    clearInterval(timer)
+                }
+            }
+            timer = window.setInterval(testTime, 1000);
+            // $(window).keyup(function () {
+            //     if ($('#LANIpAdd').parent().parent().hasClass("has-error") || $('#LANZwAdd').parent().parent()
+            //         .hasClass("has-error")) {
+            //         $('#save').attr('disabled', true)
+            //     } else {
+            //         $('#save').attr('disabled', false)
+            //     }
+            // })
+
+        </script>
+    </body>
+
+</html>
