@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* var a = 10;
+        (function () {
+            console.log(a) //undefined
+            a = 5
+            console.log(window.a) //10
+            var a = 20
+            console.log(a) //20
+        })() */
+
+
+        /* var obj = {
+            '2':3,
+            '3':4,
+            'length':2,
+            'splice':Array.prototype.splice,
+            'push':Array.prototype.push
+        }
+        obj.push(1)
+        obj.push(2)
+        console.log(obj)//[,,1,2], length为4 */
+
+
+        /* var a = {n:1}
+        var b = a
+        a.x = a = {n:2}
+        console.log(a.x)//undefined
+        console.log(b.x)//{n: 2} */
+
+        /* var a = {},
+            b = '123',
+            c = 123;
+        a[b] = 'b';
+        a[c] = 'c';
+        console.log(a[b]); //c
+
+        var a = {},
+            b = Symbol('123'),
+            c = Symbol('123');
+        a[b] = 'b';
+        a[c] = 'c';
+        console.log(a[b]); //b
+
+        var a = {},
+            b = {
+                key: '123'
+            },
+            c = {
+                key: '456'
+            };
+        a[b] = 'b';
+        a[c] = 'c';
+        console.log(a[b]) //c */
+
+        /* function changeObjProperty(o){
+            o.siteUrl = 'http://www.baidu.com'
+            o = new Object()
+            o.siteUrl = 'http://www.google.com'
+        }
+        let webSite = new Object()
+        changeObjProperty(webSite)
+        console.log(webSite.siteUrl)//http://www.baidu.com */
+
+
+        function Foo(){
+            Foo.a = function(){
+                console.log(1)
+            }
+            this.a = function(){
+                console.log(2)
+            }
+        }
+        Foo.prototype.a = function(){
+            console.log(3)
+        }
+        Foo.a = function(){
+            console.log(4)
+        }
+        Foo.a()
+        let obj = new Foo()
+        obj.a()
+        Foo.a()
+        //4 2 1
+    </script>
+</body>
+
+</html>

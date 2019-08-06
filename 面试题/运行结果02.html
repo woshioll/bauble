@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* sayName('world');
+        sayAge(10)
+        function sayName(name){
+            console.log('hello',name)//hello world
+        }
+        var sayAge = function(age){
+            console.log(age)//报错
+        } */
+
+
+        /* var x = 10;
+        bar()
+        function bar(){
+            var x = 30;
+            function foo(){
+                console.log(x)//30
+            }
+            foo()
+        } */
+
+
+        /* var x = 10
+        bar()
+        function foo(){
+            console.log(x)//10
+        }
+        function bar(){
+            var x = 30
+            foo()
+        } */
+
+
+        /* var a = 1
+        console.log(a)//1
+        function fn1() {
+            console.log(a)//undefined
+            function fn3() {
+                console.log(a)//undefined
+                function fn2() {
+                    console.log(a)//undefined 问题位置
+                }
+                fn2()
+                var a = 4
+            }
+            var a = 2
+            return fn3
+        }
+        var fn = fn1()
+        fn() */
+
+
+        /* var a = 1
+        function fn1() {
+            console.log(a)//undefined
+            function fn2() {
+                console.log(a) //2 问题位置
+            }
+            function fn3() {
+                console.log(a)//undefined
+                var a = 4
+                fn2()
+            }
+            var a = 2
+            return fn3
+        }
+        var fn = fn1()
+        fn() */
+
+
+        /* var a = 1
+        function fn1(){
+            console.log(a)//undefined
+            function fn3(){
+                console.log(a)//undefined
+                var a = 4
+                fn2()
+            }
+            var a = 2
+            return fn3
+        }
+        function fn2(){
+            console.log(a)//1 问题位置
+        }
+        var fn = fn1()
+        fn() */
+
+
+        /* var a = 1
+        var c = {name:'oll',age:2}
+        function fn1(n){ 
+            ++n
+        }
+        function fn2(obj){
+            ++obj.age
+        }
+        fn1(a)
+        fn2(c)
+        fn1(c.age)
+        console.log(a)//1
+        console.log(c)//{name:'oll',age:3} */
+
+
+        var obj1 = {a:1,b:2}
+        var obj2 = {a:1,b:2}
+        console.log(obj1 == obj2)//false
+        console.log(obj1 = obj2)//{a: 1, b: 2}
+        console.log(obj1 == obj2)//true
+    </script>
+</body>
+
+</html>
