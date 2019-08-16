@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function logger() {
+            let data = await fetch('http://sampleapi.com/posts')
+            console.log(data)//promise-01
+        }
+
+        logger()
+
+
+        // async function logger() {
+        //     try {
+        //         let user_id = await fetch('/api/users/username')
+        //         let posts = await fetch('/api/`${user_id}`')
+        //         let object = JSON.parse(user.posts.toString())
+        //         console.log(posts)
+        //     } catch (error) {
+        //         console.error('Error:', error)
+        //     }
+        // }
+
+
+        // async function count() {
+        //     let counter = 1
+        //     for (let i = 0; i < 100; i++) {
+        //         counter += 1
+        //         console.log(counter)
+        //         await sleep(1000)
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

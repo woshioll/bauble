@@ -1,0 +1,108 @@
+ <!DOCTYPE html>
+ <html>
+
+ <head>
+     <meta charset="utf-8" />
+     <title>zzzz</title>
+     <style>
+         * {
+             margin: 0;
+             padding: 0;
+
+         }
+
+         body {
+             height: 2000px;
+         }
+
+         #box {
+
+             position: absolute;
+             width: 140px;
+             height: 150px;
+             left: -140px;
+             background-color: greenyellow;
+             bottom: 0;
+         }
+
+         #box2 {
+             position: absolute;
+             width: 30px;
+             height: 60px;
+             text-align: center;
+             right: -30px;
+             top: 45px;
+             padding-top: 6px;
+             border-bottom-right-radius: 6px;
+             border-top-right-radius: 6px;
+             background-color: deepskyblue;
+             color: white;
+         }
+     </style>
+     <script type="text/javascript">
+         window.onload = function () {
+            //  parent.document.getElementById("zxpage").height = 0;
+            //  parent.document.getElementById("zxpage").height = document.body.scrollHeight;
+
+
+             var ob = document.getElementById("box");
+             var ob2 = document.getElementById("box2");
+             ob.onmouseover = function () {
+                 startMove(0);
+             }
+             ob.onmouseout = function () {
+                 startMove(-140)
+             }
+         }
+         window.onscroll = function () {
+             var ob = document.getElementById("box");
+             var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+             startMove2(parseInt((document.documentElement.clientHeight || document.body.clientHeight - ob
+                 .offsetHeight) / 2 + scrolltop - 90));
+         }
+         var timer2 = null;
+         var speed2 = 0;
+
+         function startMove2(target) {
+             var ob = document.getElementById("box");
+             clearInterval(timer2); //清除定时器，确保每次只有唯一定时器运行
+             timer2 = setInterval(function () {
+                 var dis = target - ob.offsetTop;
+                 if (dis > 0) {
+                     speed2 = Math.ceil(dis / 3);
+                 } else if (dis < 0) {
+                     speed2 = Math.floor(dis / 3)
+                 } else {
+                     clearInterval(timer2);
+                 }
+                 ob.style.top = ob.offsetTop + speed2 + 'px';
+             }, 30);
+         }
+         var timer = null;
+         var speed = 0;
+
+         function startMove(target) {
+             var ob = document.getElementById("box");
+             clearInterval(timer); //清除定时器，确保每次只有唯一定时器运行
+             timer = setInterval(function () {
+                 var dis = target - ob.offsetLeft;
+                 if (dis > 0) {
+                     speed = Math.ceil(dis / 5);
+                 } else if (dis < 0) {
+                     speed = Math.floor(dis / 5)
+                 } else {
+                     clearInterval(timer);
+                 }
+                 ob.style.left = ob.offsetLeft + speed + 'px';
+             }, 30);
+         }
+     </script>
+ </head>
+
+ <body>
+     <div id="box">
+         <div id="box2">分享到</div>
+     </div>
+ </body>
+
+ </html>

@@ -1,0 +1,140 @@
+ 
+<meta charset="utf-8">
+<script>
+/**
+ * 数字转中文大写，最大支持千亿
+*/
+console.log(number_to_chinese('100900513560.20'));
+function number_to_chinese(number){
+    var unit=['零','壹','贰','叁','肆','伍','陆','柒','捌','玖','拾'];
+    // var unit=['0','1','2','3','4','5','6','7','8','9','10'];
+     
+    var sec='';
+    var sec_c='';
+
+    var part=number.split('.')
+    if(part[1]*1>0){
+        sec_c=part[1].split('');
+        if(sec_c[1]*1>0){
+            sec=unit[sec_c[0]]+'角'+unit[sec_c[1]]+'分';
+        }
+        else{
+            sec=unit[sec_c[0]]+'角';
+        }
+    }
+
+    if(part[0]*1==0){
+        return sec;
+    }
+
+    var i=part[0].length;
+    var j=12-i;
+
+    if(j<0){
+       console.log('过千亿，不支持');
+       return ;
+    }
+
+    var zero='';
+
+    for(j;j>0;j--){
+       zero=zero+'0';
+    }
+
+    sec_c=zero+part[0];
+
+    sec_c=sec_c.split('');
+
+    var sec_1='';
+    var sec_2='';
+    var sec_3='';
+
+    for(j=0;j<12;j++){
+        if(j<4){
+          sec_1=sec_1+sec_c[j];
+        }
+        if(j<8 && j>3){
+          sec_2=sec_2+sec_c[j];
+        }
+        if(j<12 && j>7){
+          sec_3=sec_3+sec_c[j];
+        }
+    }
+
+    var p_1=convert_four(sec_1);
+    var p_2=convert_four(sec_2);
+    var p_3=convert_four(sec_3);
+
+    if(p_1>''){
+     
+        if(sec_2*1>999){
+            p_1=p_1+'亿';
+        }
+        else{
+            p_1=p_1+'亿零';
+        }
+    }
+
+    var all='';
+
+    //p_3=p_3.replace(/贰拾$/,"廿");
+    if(p_2>''){
+        if(sec_3*1>999){
+            all= p_1+p_2+'万'+p_3+'圆'+sec;
+        }
+        else if(sec_3*1==0){
+           all= p_1+p_2+'万'+p_3+'圆'+sec;
+        }
+        else{
+            all= p_1+p_2+'万零'+p_3+'圆'+sec;
+        }
+    }
+    else{
+        all= p_1+p_3+'圆'+sec;
+    }
+
+    return all;
+
+}
+
+function convert_four(number){
+
+    var unit=['零','壹','贰','叁','肆','伍','陆','柒','捌','玖','拾'];
+    var a=number.split('');
+
+    var s='';
+    var r_1=0;
+    var r_2=0;
+    var r_3=0;
+     
+
+    if(a[0]*1>0){
+        s=unit[a[0]]+'仟';
+        r_1=1;
+    }
+
+    if(a[1]*1>0){
+       s=s+unit[a[1]]+'佰';
+       r_2=1;
+    }
+    else if(r_1>0 && (a[2]>0 || a[3]>0)){
+       s=s+'零';
+    }
+
+    if(a[2]*1>0){
+       s=s+unit[a[2]]+'拾';
+       r_3=1;
+    }
+    else if(r_2>0 && a[3]>0){
+       s=s+'零';
+    }
+
+    if(a[3]*1>0){
+       s=s+unit[a[3]];
+    }
+
+    return s;
+
+}
+</script>
+<!-- //该片段来自于http://www.codesnippet.cn/detail/131220138010.html -->

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function test() {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             reject('出错了')
+        //         }, 500)
+        //     })
+        // }
+        // async function f() {
+        //     await test();
+        //     console.log('上面的await返回了rejected状态')
+        //     await Promise.resolve(456);
+        // }
+
+        // f().then(v => console.log(v)).catch(e => console.log('有错误'))
+
+        // function test() {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             resolve('出错了')
+        //         }, 500)
+        //     })
+        // }
+        // async function f() {
+        //     await test();
+        //     await Promise.resolve(456);
+        //     return '返回值'
+        // }
+
+        // f().then(v => console.log(v)).catch(e => console.log('有错误'))
+
+        //同步函数
+        function syncFun() {
+
+        }
+        //异步函数
+        function asyncFun() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(456)
+                }, 1000)
+            })
+        }
+        async function f() {
+            let a = await 123; //a为123
+            let b = await syncFun(); //b为undefined
+            let c = await asyncFun() //c为456
+            return '返回值'
+        }
+        f().then(v => console.log(v)).catch(e => console.log(e))
+    </script>
+</body>
+
+</html>

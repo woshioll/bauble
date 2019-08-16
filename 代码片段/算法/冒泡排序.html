@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //冒泡排序示例
+        // var ls = [98, 13, 6, 25, 38, 36, 30, 44, 38, 80, 61, 28, 47, 34, 95, 18, 85, 58, 89, 85, 42, 61, 74, 35, 13, 14,
+        //     80, 7, 10, 44, 10, 47, 13, 11, 52, 25, 24, 48, 34, 12, 88, 80, 33, 8, 80, 45, 64, 52, 79, 77
+        // ];
+
+        // for (var i = 0; i < ls.length; i++) {
+        //     for (var j = i + 1; j < ls.length; j++) {
+        //         if (ls[i] > ls[j]) {
+        //             ls[i] = ls[i] + ls[j];
+        //             ls[j] = ls[i] - ls[j];
+        //             ls[i] = ls[i] - ls[j];
+        //         }
+        //     }
+        // }
+
+        //双向冒泡排序示例
+        var ls = [6, 13, 98, 25, 38, 36, 30, 44, 38, 80, 61, 28, 47, 34, 95, 18, 85, 58, 89, 85, 42, 61, 74, 35, 13, 14,
+            80, 7, 10, 44, 10, 47, 13, 11, 52, 25, 24, 48, 34, 12, 88, 80, 33, 8, 80, 45, 64, 52, 79, 77
+        ];
+
+        for (var i = 0; i < ls.length; i++) {
+            for (var j = i + 1; j < ls.length - i; j++) {
+                if (ls[lent - 1 - i] < ls[lent - j]) {
+                    ls[lent - 1 - i] = ls[lent - 1 - i] + ls[lent - j];
+                    ls[lent - j] = ls[lent - 1 - i] - ls[lent - j];
+                    ls[lent - 1 - i] = ls[lent - 1 - i] - ls[lent - j];
+                } //后面的比较
+                if (ls[i] > ls[j]) {
+                    ls[i] = ls[i] + ls[j];
+                    ls[j] = ls[i] - ls[j];
+                    ls[i] = ls[i] - ls[j];
+                } //前面的比较
+            }
+        }
+
+        //双向冒泡排序稍微改进示例
+        var ls = [98, 13, 6, 25, 38, 36, 30, 44, 38, 80, 61, 28, 47, 34, 95, 18, 85, 58, 89, 85, 42, 61, 74, 35, 13, 14,
+            80, 7, 10, 44, 10, 47, 13, 11, 52, 25, 24, 48, 34, 12, 88, 80, 33, 8, 80, 45, 64, 52, 79, 77
+        ];
+
+        var lent = ls.length;
+        for (var i = 0; i < ls.length; i++) {
+            for (var j = i * 2; j < ls.length - 2 * i; j++) {
+                if (ls[i * 2] > ls[j + 1]) {
+                    ls[i * 2] = ls[i * 2] + ls[j + 1];
+                    ls[j + 1] = ls[i * 2] - ls[j + 1];
+                    ls[i * 2] = ls[i * 2] - ls[j + 1];
+                } //保持内层第一个数为循环最小
+
+                if (ls[lent - i * 2 - 1] < ls[lent - j - 1]) {
+                    ls[lent - i * 2 - 1] = ls[lent - i * 2 - 1] + ls[lent - j - 1];
+                    ls[lent - j - 1] = ls[lent - i * 2 - 1] - ls[lent - j - 1];
+                    ls[lent - i * 2 - 1] = ls[lent - i * 2 - 1] - ls[lent - j - 1];
+                } ////保持内层倒数第一个数为循环最大
+
+                if (ls[lent - 2 - i * 2] < ls[lent - j - 1]) {
+                    ls[lent - 2 - i * 2] = ls[lent - 2 - i * 2] + ls[lent - j - 1];
+                    ls[lent - j - 1] = ls[lent - 2 - i * 2] - ls[lent - j - 1];
+                    ls[lent - 2 - i * 2] = ls[lent - 2 - i * 2] - ls[lent - j - 1];
+                } //倒数上一个
+
+                if (ls[i * 2 + 1] > ls[j + 1]) {
+                    ls[i * 2 + 1] = ls[i * 2 + 1] + ls[j + 1];
+                    ls[j + 1] = ls[i * 2 + 1] - ls[j + 1];
+                    ls[i * 2 + 1] = ls[i * 2 + 1] - ls[j + 1];
+                } //下一个
+            }
+        }
+        //该片段来自于http://www.codesnippet.cn/detail/0508201614901.html
+    </script>
+</body>
+
+</html>

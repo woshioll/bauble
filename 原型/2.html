@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <h2>javascript 对象</h2>
+    <p id="demo"></p>
+    <script>
+        function Person(first,last,age,eye){
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+        }
+        var oll = new Person('John','Doe',50,'blue');
+        var oll1 = new Person('Sally','Rally',48,'green');
+        document.getElementById('demo').innerHTML = 'oll年纪是'+oll.age+'。oll1年纪是'+oll1.age
+    </script> -->
+
+    <!-- <h2>JavaScript 对象</h2>
+    <p>你无法给构造函数添加新的属性。</p>
+    <p id="demo"></p>
+    <script>
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+        }
+        Person.nationality = "English";
+        var myFather = new Person("John", "Doe", 50, "blue");
+        var myMother = new Person("Sally", "Rally", 48, "green");
+        document.getElementById("demo").innerHTML = "我父亲的国籍是 " + myFather.nationality;//undefined
+    </script> -->
+
+    <!-- <h2>JavaScript 对象</h2>
+    <p id="demo"></p>
+    <script>
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+            this.nationality = "English";
+        }
+        var myFather = new Person("John", "Doe", 50, "blue");
+        var myMother = new Person("Sally", "Rally", 48, "green");
+        document.getElementById("demo").innerHTML =
+            "我父亲的国籍是 " + myFather.nationality + "。我母亲的国籍是 " + myMother.nationality;//English
+    </script> -->
+
+
+    <!-- <h2>JavaScript 对象</h2>
+    <p id="demo"></p>
+    <script>
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+        }
+        Person.prototype.nationality = "English";
+        var myFather = new Person("John", "Doe", 50, "blue");
+        document.getElementById("demo").innerHTML = "我父亲对国籍是 " + myFather.nationality;//English
+    </script> -->
+
+
+    <h2>JavaScript 对象</h2>
+    <p id="demo"></p>
+    <script>
+        function Person(first, last, age, eye) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.eyeColor = eye;
+        }
+        Person.prototype.name = function(){
+            return this.firstName + ' ' + this.lastName
+        }
+        var myFather = new Person('John','Doe',50,'blue')
+        document.getElementById('demo').innerHTML = 'oll是' + myFather.name()
+    </script>
+</body>
+
+</html>

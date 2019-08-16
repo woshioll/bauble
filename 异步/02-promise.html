@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // // callback回调函数
+        // function getCallback(n, callback) {
+        //     setTimeout(() => {
+        //         var num = 2 * n
+        //         console.log('num', num)
+        //         callback(num)
+
+        //     }, 2000)
+        // }
+        // getCallback(3, function callback(n) {
+        //     console.log('n', n)
+        // })
+        // //6,6
+
+        // // Promise函数的基础用法(等同于上面的回调函数)
+        // function runPro(n) {
+        //     let p = new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             var num = 2 * n
+        //             console.log('num', num)
+        //             resolve(num)
+        //         }, 2000)
+        //     })
+        //     return p
+        // }
+        // runPro(3).then((res) => {
+        //     console.log('res', res)
+        // })
+
+
+        //这么看是不是觉得Promise并没有什么特别的，而且还要费劲封装，有这功夫用回调函数就好了，那么在看下面的例子
+
+        // // 三层callback回调函数（传说的回调地狱）
+        // function getCallback0(n, callback1) {
+        //     setTimeout(() => {
+        //         var num0 = 2 * n
+        //         console.log('num0', num0)
+        //         callback1(num0, function callback2(params, callback3) {
+        //             let num2 = params + 1
+        //             console.log('num2', num2)
+        //             callback3(num2)
+        //         })
+        //     }, 2000)
+        // }
+
+        // getCallback0(3, function callback1(n, callback2) {
+        //     let num1 = n + 1
+        //     console.log('num1', num1)
+        //     callback2(num1, function callback3(params) {
+        //         let num3 = params + 1
+        //         console.log('num3', num3)
+        //     })
+        // })
+
+        // // 三层Promise(等同于上面的回调函数)
+        // function runPro0(n) {
+        //     let p = new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             var num0 = n * 2
+        //             console.log('num0', num0)
+        //             resolve(num0)
+        //         }, 2000)
+        //     })
+        //     return p
+        // }
+        // runPro0(3)
+        //     .then((res) => {
+        //         // console.log('res',res)
+        //         let Pro1 = new Promise((resolve, reject) => {
+        //             var num1 = res + 1
+        //             console.log('num1', num1)
+        //             resolve(num1)
+        //         })
+        //         return Pro1
+        //     })
+        //     .then((res) => {
+        //         // console.log('res',res)
+        //         let Pro2 = new Promise((resolve, reject) => {
+        //             var num2 = res + 1
+        //             console.log('num2', num2)
+        //             resolve(num2)
+        //         })
+        //         return Pro2
+
+        //     })
+        //     .then((res) => {
+        //         var num3 = res + 1
+        //         console.log('num3', num3)
+        //         // 如果需要可以继续回调
+        //     })
+
+        //基础用法
+        const p = new Promise(function (resolve, reject) {
+            if (success) {
+                resolve('成功的结果')
+            } else {
+                reject('失败的结果')
+            }
+        })
+        p.then(function (res) {
+            // 接收resolve传来的数据，做些什么
+
+        }, function (err) {
+            // 接收reject传来的数据，做些什么
+        })
+        p.catch(function (err) {
+            // 接收reject传来的数据或者捕捉到then()中的运行报错时，做些什么
+        })
+        p.finally(function () {
+            // 不管什么状态都执行
+        })
+    </script>
+</body>
+
+</html>
